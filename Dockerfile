@@ -2,6 +2,7 @@ FROM php:8.2-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    nginx \
     git \
     curl \
     zip \
@@ -10,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
+    supervisor \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Install Composer
@@ -18,17 +20,24 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy project files
+# Copy source code
 COPY . .
 
 # Install PHP dependencies
-RUN composer install
+RUN composer install --optimize-autoloader --no-dev
 
-# Clear Laravel config cache (optional)
+# Clear config
 RUN php artisan config:clear
 
-# Port që Railway do ta përdorë
-EXPOSE 8000
+# Copy nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Komanda për startim
-CMD php artisan serve --host=0.0.0.0 --port=$APP_PORT
+# Create supervisor config
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisord.conf
+
+# Expose the port used by the application
+EXPOSE 8080
+
+# Start supervisor to run both php-fpm and nginx
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
