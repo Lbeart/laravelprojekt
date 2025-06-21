@@ -26,6 +26,9 @@ RUN chmod +x /start.sh
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+
+RUN chmod +x /start.sh
+
 EXPOSE 80
 
 CMD ["sh", "/start.sh"]
