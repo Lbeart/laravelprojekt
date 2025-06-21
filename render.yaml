@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: laravelprojekt
-    env: docker
-    repo: https://github.com/Lbeart/laravelprojekt
-    plan: free
-    dockerfilePath: ./Dockerfile
-    branch: main
