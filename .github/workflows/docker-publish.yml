@@ -9,9 +9,9 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
-      contents: read         # untuk checkout kode
-      packages: write        # untuk publish ke GHCR
-      id-token: write        # jika menggunakan OIDC
+      contents: read
+      packages: write
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -35,4 +35,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/laravel-railway:latest
+          tags: ghcr.io/lbeart/laravel-railway:latest
