@@ -37,7 +37,17 @@ RUN apk update && apk add --no-cache \
     unzip
 
 # Build and enable PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+# Instaloni PHP extensions pa kompilim
+RUN apk update && apk add --no-cache \
+    php8-pdo \
+    php8-pdo_mysql \
+    php8-mbstring \
+    php8-exif \
+    php8-pcntl \
+    php8-bcmath \
+    php8-gd \
+    php8-zip \
+    php8-xml
 
 # Bring over Composer binary
 COPY --from=build_vendor /usr/bin/composer /usr/bin/composer
