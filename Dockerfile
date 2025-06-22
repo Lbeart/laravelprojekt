@@ -11,7 +11,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # ==========================
 # STAGE 2: PHP + Laravel App
 # ==========================
-FROM php:8.2-fpm
+FROM php:8.1-fpm
 
 # Install system packages
 RUN apt-get update && apt-get install -y \
