@@ -1,4 +1,4 @@
-# Stage 1: Composer
+# Stage 1: Composer 
 FROM composer:latest AS composer_stage
 
 # Stage 2: Laravel + PHP + Nginx
@@ -23,12 +23,14 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 # Install Composer
 COPY --from=composer_stage /usr/bin/composer /usr/bin/composer
 
-# Copy app files
-COPY . /var/www
 WORKDIR /var/www
 
-# Install Laravel dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Copy composer files and install dependencies
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Copy the rest of the application
+COPY . .
 
 # Copy configs
 COPY nginx.conf /etc/nginx/nginx.conf
