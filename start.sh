@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Krijo sock directory (opsionale në disa raste)
-mkdir -p /run/php && touch /run/php/php-fpm.sock
+php artisan config:cache
+php artisan migrate --force || true
 
-# Starto supervisord
-exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+/usr/bin/supervisord -c /etc/supervisord.conf
