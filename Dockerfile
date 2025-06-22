@@ -36,7 +36,6 @@ RUN chmod +x /start.sh
 # Give permission
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www
-
-EXPOSE 80
-
+    
+EXPOSE 8080
 CMD ["/bin/bash", "/start.sh"]
