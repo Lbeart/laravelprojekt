@@ -1,4 +1,6 @@
-# STAGE 1: Composer dependencies
+# ───────────────────────────────────────────────────────────────
+# STAGE 1: Composer dependencies (build_vendor)
+# ───────────────────────────────────────────────────────────────
 FROM php:8.2-cli AS build_vendor
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -6,16 +8,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     git \
     curl \
-    && docker-php-ext-install zip \
-    && rm -rf /var/lib/apt/lists/*
+    libzip-dev \
+  && docker-php-ext-install zip \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 WORKDIR /app
-COPY composer.json composer.lock ./
+COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# STAGE 2: Final image with PHP-FPM
+# ───────────────────────────────────────────────────────────────
+# STAGE 2: Final image with PHP-FPM on Alpine
+# ───────────────────────────────────────────────────────────────
 FROM php:8.2-fpm-alpine
 
 RUN apk update && apk add --no-cache \
