@@ -62,9 +62,9 @@ Route::get('/create-admin', function () {
     User::updateOrCreate(
         ['email' => 'admin@example.com'],
         [
-            'name' => 'Admini',
+            'name'     => 'Admin',
             'password' => Hash::make('admin123'),
-            'role' => 'admin',
+            'role'     => 'admin',
         ]
     );
 
