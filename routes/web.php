@@ -1,6 +1,9 @@
 <?php
 
+
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash; // <-- kjo ishte mangut
 use App\Http\Controllers\KlientiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
