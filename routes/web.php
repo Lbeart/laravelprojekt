@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KlientiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Models\User;
 
 // Welcome page
 Route::get('/', function () {
@@ -62,11 +63,11 @@ Route::get('/create-admin', function () {
     User::updateOrCreate(
         ['email' => 'admin@example.com'],
         [
-            'name'     => 'Admin',
+            'name' => 'Admin',
             'password' => Hash::make('admin123'),
-            'role'     => 'admin',
+            'role' => 'admin',
         ]
     );
 
-    return 'Admini u krijua me sukses ✅';
+    return '✅ Admin u krijua me sukses';
 });
