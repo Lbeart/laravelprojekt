@@ -10,6 +10,20 @@ use App\Http\Controllers\AdminController;
 use App\Models\User;
 
 // Welcome page
+
+
+Route::get('/create-admin', function () {
+    \App\Models\User::updateOrCreate(
+        ['email' => 'admin@example.com'],
+        [
+            'name' => 'Admin',
+            'password' => Hash::make('admin123'),
+            'role' => 'admin',
+        ]
+    );
+    return '✅ Admin u krijua me sukses';
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -62,21 +76,3 @@ Route::delete('/klientet/{id}', [KlientiController::class, 'destroy'])->name('kl
 Route::get('/admin/kerko-klient', [AdminController::class, 'kerkoKlient'])->name('admin.kerko.klient');
 
 
-Route::get('/create-admin', function () {
-    User::updateOrCreate(
-        ['email' => 'admin@example.com'],
-        [
-            'name' => 'Admin',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin',
-        ]
-    );
-
-    return '✅ Admin u krijua me sukses';
-});
-
-
-
-Route::get('/test', function () {
-    return '🧪 Rruga test po funksionon!';
-});
