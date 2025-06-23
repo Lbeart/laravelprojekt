@@ -74,3 +74,9 @@ Route::get('/create-admin', function () {
 
     return '✅ Admin u krijua me sukses';
 });
+
+
+
+Route::get('/test', function () {
+    return '🧪 Rruga test po funksionon!';
+});
