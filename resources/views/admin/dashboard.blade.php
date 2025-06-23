@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
+
 <body class="p-3 bg-light">
+@extends('layouts.app')
+
+@section('content')
+    <h1>✅ Admin Dashboard Test</h1>
+    <p>Kjo faqe u hap me sukses!</p>
+@endsection
 
 <div class="container">
 
