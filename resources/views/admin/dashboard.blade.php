@@ -12,10 +12,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>✅ Admin Dashboard Test</h1>
-    <p>Kjo faqe u hap me sukses!</p>
-@endsection
-
 <div class="container">
 
     <h2 class="mb-4 text-center text-primary">📋 Paneli i Punëtorëve</h2>
@@ -130,6 +126,10 @@
     </form>
 
 </div>
+@endsection
+
+
+
 
 </body>
 </html>
