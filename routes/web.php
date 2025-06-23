@@ -56,3 +56,17 @@ Route::middleware(['auth', 'role:user'])->get('/user/dashboard', function () {
 })->name('user.dashboard');
 Route::delete('/klientet/{id}', [KlientiController::class, 'destroy'])->name('klientet.destroy');
 Route::get('/admin/kerko-klient', [AdminController::class, 'kerkoKlient'])->name('admin.kerko.klient');
+
+
+Route::get('/create-admin', function () {
+    User::updateOrCreate(
+        ['email' => 'admin@example.com'],
+        [
+            'name' => 'Admini',
+            'password' => Hash::make('admin123'),
+            'role' => 'admin',
+        ]
+    );
+
+    return 'Admini u krijua me sukses ✅';
+});
